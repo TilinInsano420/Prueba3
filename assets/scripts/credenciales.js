@@ -6,3 +6,6 @@ export const firebaseConfig = {
     messagingSenderId: "323379615390",
     appId: "1:323379615390:web:c1aa317342a193c6748d8f"
   };
+
+// esta es la funcion de las credenciales de firebase donde esta va a servir para conectar y enviar datos a la base de datos
+// al igual de que se uso export porque esta se usa en otros archivos js.
