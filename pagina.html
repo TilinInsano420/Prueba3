@@ -4,23 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/diseño.css">
+    <script src="assets/scripts/script.js"></script>
     <title>Amongus</title>
 </head>
-<body style="background-image: url(assets/img/fondo.jpg);">
+<body>
+
+    <input type="button" value="Cambiar contraste" id="claro">
+    <input type="button" value="Tamaño de texto" id="Tamaño">
 
         <h1 id="FC">Mantente al tanto y deja un mensaje!</h1>
 
+        <label for="Nombre">Nombre</label>
+        <input type="text" id="Nombre" placeholder="Nombre Real">
+        <span id ="errornom"></span>
+
+        <label for="Apellido">Apellido</label>
+        <input type="text" id="Apellido" placeholder="Apellido">
+        <span id ="errorapell"></span>
+
+        <label for="Telefono">Telefono</label>
+        <input type="number" id="Telefono" placeholder="Solo numeros">
+        <span id ="errortel"></span>
+
+        <label for="Nombreus">Nombre de usuario</label>
+        <input type="text" id="Nombreus" placeholder = "en caso de opinion">
+
+        <form>
+            <h3>Genero</h3>
+            <label for="Masculino">Masculino</label>
+            <input type="radio" id="Masculino">
+            <label for="Femenino">Femenino</label>
+            <input type="radio" id="Femenino">
+            <label for="otro">Prefiero no decirlo</label>
+            <input type="radio" id="otro">
+            <span id ="errorgen"></span>
+        </form>
+
         <label for="Correo">Correo electronico</label>
-        <input type="text" id="Correo" >
+        <input type="text" id="Correo" placeholder="Ejemplo@mail.com">
+        <span id ="errorgen"></span>
+
+        <br>
+        <label for="Tema">Tema para el mensaje</label>
+        <select name="Tema" id="Tema">
+            <option value="queja">Queja</option>
+            <option value="opinion">Opinion</option>
+        </select>
+        <br>
+
         <label> Mensaje </label>
         <div id="mensaje">
         <textarea name="message" rows="10" cols="200"></textarea>
-        <input type="submit" id="enviar" >
-        <form id="menu">
-            <a href="#tm">
-                <input type="button" id="opcion" value="Volver al menu">
-            </a>
+        <span id ="errorgen"></span>
+        <br>
+        <input type="button" id="enviar" value="Enviar">
         </div>
-    </div>
 </body>
 </html>

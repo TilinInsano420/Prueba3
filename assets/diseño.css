@@ -1,117 +1,21 @@
-#tm {
+
+body{
+    background-color: black;
     color: white;
-    margin-bottom: 5%;
-    margin-top: 15%;
-    text-align: center;
+}
+
+
+.claro{
+    background-color:white;
+    color: black;
 }
 
 input{
-    text-align: center;
-    width: 400px;
-    height: 50px;
-    display: block;
-    margin:auto;
     background-color: black;
     color: white;
-    font-family:sans-serif ;
-}
-
-#menu{
-    margin:0px 25% 0px 25%
-
-}
-
-p{
-    color: white;
-    text-align: left;
-    margin-left: 5%;
-    margin-top: 15%;
-    font-family: sans-serif;
-}
-
-h1 {
-    color: white;
-    margin-bottom: 0%;
-    margin-top: 15%;
-    text-align: center;
-
-}
-
-#parrafo{
-    margin-right: 50%;
-    
-}
-
-img{
-    float: right;
-    margin-right: 25%;
-    margin: auto;
-
-}
-
-#QS,#V,#MV,#RS{
-    margin-top: 25% ;
-    margin-bottom: 8%;
-}
-
-#menu{
-    margin-top: 2%;
-}
-
-video{
-    height: 800px;
-    width: 1900px;
-}
-
-#video{
-    margin: auto;
-}
-
-div{
-    margin: auto;
-}
-
-#img1{
-    width: 500px;
-    display: inline-block;
-    margin: 2%
-}
-h2{
-    color: white;
-    display: block;
-    text-align: center;
-    margin-bottom: 2%;
-}
-
-a:link {
-    color: red
-}
-a:visited {
-    color: rgb(255, 187, 0)}
-
-a:hover {
-    color: blue}
-
-label{
-    color: white;
-    text-align: center;
-    display: block;
-    margin-top: 5%;
-}
-
-#Correo{
-    background-color: rgb(0, 0, 0);
-    border-color: red;
-    color: rgb(255, 255, 255);
 }
 
 textarea{
-    margin: auto;
-    color: white;
     background-color: black;
-}
-
-#mensaje{
-    text-align: center;
-    border-color: red;
+    color: white;
 }
