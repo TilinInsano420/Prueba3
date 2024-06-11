@@ -17,19 +17,19 @@
         <h1>Mantente al tanto y deja un mensaje!</h1>
 
         <label for="Nombre">Nombre</label>
-        <input type="text" id="Nombre" placeholder="Nombre Real">
+        <input type="text" id="Nombre" placeholder="Nombre Real" class="texto">
         <span id ="errornom" class="error"></span>
 
         <label for="Apellido">Apellido</label>
-        <input type="text" id="Apellido" placeholder="Apellido">
+        <input type="text" id="Apellido" placeholder="Apellido" class="texto">
         <span id ="errorapell" class="error"></span>
 
         <label for="Telefono">Telefono</label>
-        <input type="number" id="Telefono" placeholder="Solo numeros">
+        <input type="number" id="Telefono" placeholder="Solo numeros" class="texto">
         <span id ="errortel" class="error"></span>
 
         <label for="Nombreus">Nombre de usuario</label>
-        <input type="text" id="Nombreus" placeholder = "en caso de opinion">
+        <input type="text" id="Nombreus" placeholder = "en caso de opinion" class="texto">
         <span id ="errorus" class="error"></span>
 
         <form>
@@ -62,5 +62,23 @@
         <br>
         <input type="button" id="enviar" value="Enviar">
         </div>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Nombre Usuario</th>
+                    <th>Genero</th>
+                    <th>Correo</th>
+                    <th>Tema</th>
+                    <th>Mensaje</th>
+                </tr>
+            </thead>
+            <tbody id ="tabla">
+    
+            </tbody>
+        </table>
 </body>
 </html>

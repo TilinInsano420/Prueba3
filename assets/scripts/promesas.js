@@ -1,6 +1,19 @@
 import { db } from "./firebase.js";
-import { addDoc, collection} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { addDoc, collection, getDocs, updateDoc, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 export const registrarp = async(usuario)=>{
     const docRef = await addDoc(collection(db, "usuario"),usuario);;
+}
+
+export const Recargador = async()=>{
+    //Recuperar la ref (ruta)
+    const ref = collection(db, "usuario")
+    //Recupera una captura de la misma base de datos
+    const qSnap = await getDocs(ref)
+    let listado = []
+    qSnap.forEach((doc) => {
+        console.log(doc.data());
+        listado.push({...doc.data(),id:doc.id})
+    });;
+    return listado;
 }

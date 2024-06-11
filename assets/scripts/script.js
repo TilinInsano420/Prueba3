@@ -1,6 +1,7 @@
-import { registrarp } from "./promesas.js";
+import { registrarp, Recargador  } from "./promesas.js";
 
 window.addEventListener("load",()=>{
+    cargar();
     document.getElementById("claro").addEventListener("click",claro) 
     document.getElementById("Tamano").addEventListener("click",tamanio)
     document.getElementById("enviar").addEventListener("click",validacion)
@@ -14,6 +15,7 @@ function claro() {
     let etiquetas = document.getElementsByTagName("label");
     let cuerpo = document.getElementsByTagName("body");
     let men = document.getElementsByTagName("textarea");
+    let fond = document.getElementsByClassName("texto")
     
     // estos son bucles que recorren todos los elementos en los arreglos de input,h1,label,body y textarea
     // y aplica la clase css "claro" en cada uno de ellos lo cual cambia el contraste de la pagina.
@@ -31,6 +33,9 @@ function claro() {
     }
     for (let i = 0; i < men.length; i++) {
         men[i].classList.toggle("claro");
+    }
+    for (let i = 0; i < texto.length; i++) {
+        texto[i].classList.toggle("claro");
     }
 }
 
@@ -62,13 +67,14 @@ const registrar = () => {
 
     // Este crea un objeto con los datos recuperados
     let objeto = {nombre:vNombre,apellido:vApellido,nombreUsuario:vNombreUsuario,telefono:vTelefono,correo:vCorreo,
-        eGenero:vGenero,tema:vTema,mensaje:vMensaje
+        genero:vGenero,tema:vTema,mensaje:vMensaje
     };
 
     // Envia la variable objeto a la funcion de registrarp de promesas lo cual esto lleva finalmente a la base de datos
     registrarp(objeto)
         .then(() => {
             alert("Se registró exitosamente");
+            cargar()
         })
         //este es en caso de que ocurra un error lo cual a traves de los logs mostrara el mensaje de error
         .catch((error) => {
@@ -163,4 +169,28 @@ function validacion() {
     if (!errorFlag) {
         registrar();
     }
+}
+
+const cargar = ()=>{
+    Recargador().then((usuarios)=>{
+        //cargar todo en la tabla creada dentro del html
+        let estructura = ""
+        //esto lo carga a la tabla del html
+        usuarios.forEach((p) => {
+            estructura += "<tr>"
+            estructura += "<td>"+p.nombre+"</td>"
+            estructura += "<td>"+p.apellido+"</td>"
+            estructura += "<td>"+p.telefono+"</td>"
+            estructura += "<td>"+p.nombreUsuario+"</td>"
+            estructura += "<td>"+p.genero+"</td>"
+            estructura += "<td>"+p.correo+"</td>"
+            estructura += "<td>"+p.tema+"</td>"
+            estructura += "<td>"+p.mensaje+"</td>"
+            estructura += "<td><button id='act"+p.id+"'>Actualizar</button></td>"
+            estructura += "<td><button id='bor"+p.id+"'>Eliminar</button></td>"
+            estructura += "</tr>";
+        });
+        document.getElementById("tabla").innerHTML = estructura;
+            
+    })
 }
