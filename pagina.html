@@ -10,24 +10,25 @@
 <body>
 
     <input type="button" value="Cambiar contraste" id="claro">
-    <input type="button" value="Tamaño de texto" id="Tamaño">
+    <input type="button" value="Tamaño de texto" id="Tamano">
 
-        <h1 id="FC">Mantente al tanto y deja un mensaje!</h1>
+        <h1>Mantente al tanto y deja un mensaje!</h1>
 
         <label for="Nombre">Nombre</label>
         <input type="text" id="Nombre" placeholder="Nombre Real">
-        <span id ="errornom"></span>
+        <span id ="errornom" class="error"></span>
 
         <label for="Apellido">Apellido</label>
         <input type="text" id="Apellido" placeholder="Apellido">
-        <span id ="errorapell"></span>
+        <span id ="errorapell" class="error"></span>
 
         <label for="Telefono">Telefono</label>
         <input type="number" id="Telefono" placeholder="Solo numeros">
-        <span id ="errortel"></span>
+        <span id ="errortel" class="error"></span>
 
         <label for="Nombreus">Nombre de usuario</label>
         <input type="text" id="Nombreus" placeholder = "en caso de opinion">
+        <span id ="errorus" class="error"></span>
 
         <form>
             <h3>Genero</h3>
@@ -37,12 +38,12 @@
             <label for="Femenino">Femenino</label>
             <input type="radio" id="Otro" name="genero" value="Otro">
             <label for="Otro">Prefiero no decirlo</label>
-            <span id ="errorgen"></span>
+            <span id ="errorgen" class="error"></span>
         </form>
 
         <label for="Correo">Correo electronico</label>
-        <input type="text" id="Correo" placeholder="Ejemplo@mail.com">
-        <span id ="errorgen"></span>
+        <input type="email" id="Correo" placeholder="Ejemplo@mail.com">
+        <span id ="errorcor" class="error"></span>
 
         <br>
         <label for="Tema">Tema para el mensaje</label>
@@ -55,7 +56,7 @@
         <label> Mensaje </label>
         <div id="mensaje">
         <textarea name="message" rows="10" cols="200"></textarea>
-        <span id ="errorgen"></span>
+        <span id ="errormen" class="error"></span>
         <br>
         <input type="button" id="enviar" value="Enviar">
         </div>

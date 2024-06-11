@@ -1,15 +1,11 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://support.google.com/firebase/answer/7015592
-const firebaseConfig = {
-    FIREBASE_CONFIGURATION
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  import{firebaseConfig} from "./credenciales.js"
 
 
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  export const db = getFirestore(app);
