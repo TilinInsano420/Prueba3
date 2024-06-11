@@ -1,3 +1,5 @@
+import { registrarp } from "./promesas.js";
+
 window.addEventListener("load",()=>{
     document.getElementById("claro").addEventListener("click",claro) 
     document.getElementById("Tamano").addEventListener("click",tamanio)
@@ -34,6 +36,47 @@ function claro() {
 
 function tamanio() {}
 
+
+//Esta funcion es para registrar los datos que escribe el usuario a la base de datos
+const registrar = () => {
+    // Recupera elementos
+    let eNombre = document.getElementById("Nombre");
+    let eApellido = document.getElementById("Apellido");
+    let eNombreUsuario = document.getElementById("Nombreus");
+    let eTelefono = document.getElementById("Telefono");
+    let eCorreo = document.getElementById("Correo");
+    let eTema = document.getElementById("Tema");
+    let eMensaje = document.getElementById("men");
+    let eGenero = document.querySelector('input[name="genero"]:checked')
+
+    // Recupera valores de elementos
+    let vNombre = eNombre.value;
+    let vApellido = eApellido.value;
+    let vNombreUsuario = eNombreUsuario.value;
+    let vTelefono = eTelefono.value;
+    let vCorreo = eCorreo.value;
+    let vTema = eTema.value;
+    let vMensaje = eMensaje.value;
+    let vGenero = eGenero.value;
+
+
+    // Este crea un objeto con los datos recuperados
+    let objeto = {nombre:vNombre,apellido:vApellido,nombreUsuario:vNombreUsuario,telefono:vTelefono,correo:vCorreo,
+        eGenero:vGenero,tema:vTema,mensaje:vMensaje
+    };
+
+    // Envia la variable objeto a la funcion de registrarp de promesas lo cual esto lleva finalmente a la base de datos
+    registrarp(objeto)
+        .then(() => {
+            alert("Se registró exitosamente");
+        })
+        //este es en caso de que ocurra un error lo cual a traves de los logs mostrara el mensaje de error
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+
 //la funcion validacion para ver si todos requisitos necesarios para enviarlo estan correcto
 function validacion() { 
     
@@ -44,7 +87,7 @@ function validacion() {
     let nombreUsuario = document.getElementById("Nombreus").value;
     let genero = document.querySelector('input[name="genero"]:checked');
     let correo = document.getElementById("Correo").value;
-    let mensaje = document.getElementsByName("message")[0].value;
+    let mensaje = document.getElementById("men").value;
 
     // Para obtener los elementos de error
     let errornom = document.getElementById("errornom");
@@ -58,6 +101,7 @@ function validacion() {
     let errorFlag = false;
 
     // Valida si hay algo escrito en el campo nombre, de no ser asi aplica en el span un mensaje de error y lo pinta de color rojo
+    // en caso de que este correcto, no se mostrara el texto(eso va para el resto tambien)
     if (nombre === "") {
         errornom.textContent = "Por favor introduzca su nombre";
         errornom.style.color = "red";
@@ -115,8 +159,8 @@ function validacion() {
     } else {
         errormen.textContent = "";
     }
-    // si el"errorFlag" es falsa, entonces se muestra una alerta con el mensaje "validacion correcta" que significa que funciono.
+    // si el"errorFlag" es falsa, ejecuta la funcion de registrar lo cual esto mandaria los datos hacia la bdd.
     if (!errorFlag) {
-        alert("validacion correcta");
+        registrar();
     }
 }
