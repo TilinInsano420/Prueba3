@@ -34,8 +34,8 @@ function claro() {
     for (let i = 0; i < men.length; i++) {
         men[i].classList.toggle("claro");
     }
-    for (let i = 0; i < texto.length; i++) {
-        texto[i].classList.toggle("claro");
+    for (let i = 0; i < fond.length; i++) {
+        fond[i].classList.toggle("claro");
     }
 }
 
@@ -175,7 +175,7 @@ const cargar = ()=>{
     Recargador().then((usuarios)=>{
         //cargar todo en la tabla creada dentro del html
         let estructura = ""
-        //esto lo carga a la tabla del html
+        //esto se carga a la tabla del html
         usuarios.forEach((p) => {
             estructura += "<tr>"
             estructura += "<td>"+p.nombre+"</td>"
@@ -191,6 +191,5 @@ const cargar = ()=>{
             estructura += "</tr>";
         });
         document.getElementById("tabla").innerHTML = estructura;
-            
     })
 }

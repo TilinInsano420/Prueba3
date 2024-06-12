@@ -17,3 +17,8 @@ export const Recargador = async()=>{
     });;
     return listado;
 }
+
+export const actualizar = async(objeto,id)=>{
+    const ref = doc(db,"usuario",id);
+    await updateDoc(ref,objeto)
+}
