@@ -17,7 +17,6 @@ function claro() {
     let etiquetas = document.getElementsByTagName("label");
     let cuerpo = document.getElementsByTagName("body");
     let men = document.getElementsByTagName("textarea");
-    let fond = document.getElementsByClassName("texto")
     
     // estos son bucles que recorren todos los elementos en los arreglos de input,h1,label,body y textarea
     // y aplica la clase css "claro" en cada uno de ellos lo cual cambia el contraste de la pagina.
@@ -36,12 +35,11 @@ function claro() {
     for (let i = 0; i < men.length; i++) {
         men[i].classList.toggle("claro");
     }
-    for (let i = 0; i < fond.length; i++) {
-        fond[i].classList.toggle("claro");
-    }
 }
 
+// esta funcion hace que rote entre 3 diferentes tamaños
 function tamanio() {
+    //toma el elemento por id y hace una rotacion con los if viendo de que si es uno lo reemplaza por otro y asi
     let cuerpo = document.getElementById("body")
         if (cuerpo.classList.contains("Normal")) {
             cuerpo.classList.replace("Normal", "tam1")
@@ -207,11 +205,16 @@ const cargar = ()=>{
         //este  a traves de presionar el boton actualizar encuentra a traves de la id, los datos necesarios para mostrarlos
         //en el formulario
         usuarios.forEach((p) => {
-            document.getElementById("act" + p.id).addEventListener("click", () => {
+            // consigue los elementos para que estos se puedan mostrar respectivamente con la presionada del boton correcto
+            document.getElementById("act"+p.id).addEventListener("click", () => {
                 document.getElementById("Nombre").value = p.nombre;
                 document.getElementById("Apellido").value = p.apellido;
                 document.getElementById("Telefono").value = p.telefono;
                 document.getElementById("Nombreus").value = p.nombreUsuario;
+                
+                //llama al por id al boton de actualizar y le agrega un atributo con la id para llamarla mas tarde 
+                document.getElementById("Actualizar").setAttribute("data-id",p.id);
+
 
                 //este hace que el genero se marque al presionar el boton actualizar
                 document.querySelector('input[name="genero"][value="' + p.genero + '"]').checked = true;
@@ -219,7 +222,7 @@ const cargar = ()=>{
                 document.getElementById("Correo").value = p.correo;
                 document.getElementById("Tema").value = p.tema;
                 document.getElementById("men").value = p.mensaje;
-
+                
 
                 //estos son para que no este el boton enviar y se registre 2 veces cuando deberia solo actualizar
                 document.getElementById("enviar").style.display = "none";
@@ -235,14 +238,15 @@ const cargar = ()=>{
                     }).catch((e) => {
                         console.log(e);
                     });
-                } else {
-                }
+                } else {}
             });
         });
     });
 };
 
+// este es para que se haga la actualizacion en la bd
 const actualizardats = () => {
+    // Para obtener los valores de los campos por id 
     let bnombre = document.getElementById("Nombre");
     let bapellido = document.getElementById("Apellido");
     let btelefono = document.getElementById("Telefono");
@@ -252,6 +256,7 @@ const actualizardats = () => {
     let btema = document.getElementById("Tema");
     let bmensaje = document.getElementById("men");
 
+    // Recupera valores de elementos
     let vnombre = bnombre.value;
     let vapellido = bapellido.value;
     let vtelefono = btelefono.value;
@@ -260,11 +265,16 @@ const actualizardats = () => {
     let vcorreo = bcorreo.value;
     let vtema = btema.value;
     let vmensaje = bmensaje.value;
-
+    
+    //todos los datos se guardan en un solo objeto
     let obj = {nombre: vnombre,apellido: vapellido,telefono: vtelefono,nombreUsuario: vnombreUsuario,genero: vgenero,
         correo: vcorreo,tema: vtema,mensaje: vmensaje}
 
-    let id = document.getElementById("Actualizar").value;
+    //se llama la funcion de actualizar de promesas para que lo mande a la bd
+    //pd: tuve que agregar un atributo al actualizar porque me mostraba el codigo del documento en ves de mostrar
+    //actualizar pero funciona!!
+    let id = document.getElementById("Actualizar").getAttribute("data-id");
+    console.log("please:",id)
     actualizaru(obj,id).then(() => {
         alert("Se actualizó correctamente");
         document.getElementById("enviar").style.display = "inline";
@@ -276,7 +286,7 @@ const actualizardats = () => {
     });
 };
 
-
+// esta funcion limpia todo despues de presionarlo
 function volver() {
     document.querySelector("form").reset();
     document.getElementById("enviar").style.display = "inline";
