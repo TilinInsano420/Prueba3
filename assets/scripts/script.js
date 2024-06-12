@@ -1,10 +1,12 @@
-import { registrarp, Recargador  } from "./promesas.js";
-
+import { registrarp, Recargador, actualizaru, eliminar } from "./promesas.js";
+// esto hace que todo cargue una vez que haya cargado toda la pagina
 window.addEventListener("load",()=>{
     cargar();
     document.getElementById("claro").addEventListener("click",claro) 
     document.getElementById("Tamano").addEventListener("click",tamanio)
     document.getElementById("enviar").addEventListener("click",validacion)
+    document.getElementById("Actualizar").addEventListener("click", actualizardats)
+    document.getElementById("volver").addEventListener("click", volver)
 });
 
 // aplica el contraste claro a la pagina.
@@ -39,7 +41,18 @@ function claro() {
     }
 }
 
-function tamanio() {}
+function tamanio() {
+    let cuerpo = document.getElementById("body")
+        if (cuerpo.classList.contains("Normal")) {
+            cuerpo.classList.replace("Normal", "tam1")
+        } else if (cuerpo.classList.contains("tam1")) {
+            cuerpo.classList.replace("tam1", "tam2")
+        } else if (cuerpo.classList.contains("tam2")) {
+            cuerpo.classList.replace("tam2", "tam3")
+        } else if (cuerpo.classList.contains("tam3")) {
+            cuerpo.classList.replace("tam3", "Normal")
+        }
+    }
 
 
 //Esta funcion es para registrar los datos que escribe el usuario a la base de datos
@@ -170,12 +183,12 @@ function validacion() {
         registrar();
     }
 }
-
+// Función para cargar los datos a la tabla
 const cargar = ()=>{
     Recargador().then((usuarios)=>{
         //cargar todo en la tabla creada dentro del html
         let estructura = ""
-        //esto se carga a la tabla del html
+        //esto se carga a la tabla del html y se pueda vizualisar los datos
         usuarios.forEach((p) => {
             estructura += "<tr>"
             estructura += "<td>"+p.nombre+"</td>"
@@ -191,5 +204,81 @@ const cargar = ()=>{
             estructura += "</tr>";
         });
         document.getElementById("tabla").innerHTML = estructura;
-    })
-}
+        //este  a traves de presionar el boton actualizar encuentra a traves de la id, los datos necesarios para mostrarlos
+        //en el formulario
+        usuarios.forEach((p) => {
+            document.getElementById("act" + p.id).addEventListener("click", () => {
+                document.getElementById("Nombre").value = p.nombre;
+                document.getElementById("Apellido").value = p.apellido;
+                document.getElementById("Telefono").value = p.telefono;
+                document.getElementById("Nombreus").value = p.nombreUsuario;
+
+                //este hace que el genero se marque al presionar el boton actualizar
+                document.querySelector('input[name="genero"][value="' + p.genero + '"]').checked = true;
+
+                document.getElementById("Correo").value = p.correo;
+                document.getElementById("Tema").value = p.tema;
+                document.getElementById("men").value = p.mensaje;
+
+
+                //estos son para que no este el boton enviar y se registre 2 veces cuando deberia solo actualizar
+                document.getElementById("enviar").style.display = "none";
+                document.getElementById("Actualizar").style.display = "inline";
+                document.getElementById("volver").style.display = "inline";
+            });
+            // este es para pode borrar a traves del boton eliminar y pregunta si se va a borrar el mensaje
+            document.getElementById("bor" + p.id).addEventListener("click", () => {
+                if (confirm("Desea eliminar el mensaje de: \n" + p.nombre + " " + p.apellido)) {
+                    eliminar(p.id).then(() => {
+                        alert("Mensaje eliminado");
+                        cargar();
+                    }).catch((e) => {
+                        console.log(e);
+                    });
+                } else {
+                }
+            });
+        });
+    });
+};
+
+const actualizardats = () => {
+    let bnombre = document.getElementById("Nombre");
+    let bapellido = document.getElementById("Apellido");
+    let btelefono = document.getElementById("Telefono");
+    let bnombreUsuario = document.getElementById("Nombreus");
+    let bgenero = document.querySelector('input[name="genero"]:checked');
+    let bcorreo = document.getElementById("Correo");
+    let btema = document.getElementById("Tema");
+    let bmensaje = document.getElementById("men");
+
+    let vnombre = bnombre.value;
+    let vapellido = bapellido.value;
+    let vtelefono = btelefono.value;
+    let vnombreUsuario = bnombreUsuario.value;
+    let vgenero = bgenero.value;
+    let vcorreo = bcorreo.value;
+    let vtema = btema.value;
+    let vmensaje = bmensaje.value;
+
+    let obj = {nombre: vnombre,apellido: vapellido,telefono: vtelefono,nombreUsuario: vnombreUsuario,genero: vgenero,
+        correo: vcorreo,tema: vtema,mensaje: vmensaje}
+
+    let id = document.getElementById("Actualizar").value;
+    actualizaru(obj,id).then(() => {
+        alert("Se actualizó correctamente");
+        document.getElementById("enviar").style.display = "inline";
+        document.getElementById("Actualizar").style.display = "none";
+        document.getElementById("volver").style.display = "none";
+        cargar();
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
+
+function volver() {
+    document.querySelector("form").reset();
+    document.getElementById("enviar").style.display = "inline";
+    document.getElementById("Actualizar").style.display = "none";
+    document.getElementById("volver").style.display = "none";}

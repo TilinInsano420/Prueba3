@@ -8,13 +8,13 @@
     <script src="assets/scripts/firebase.js" type="module"></script>
     <title>Amongus</title>
 </head>
-<body>
+<body class="Normal" id="body">
 
     <input type="button" value="Cambiar contraste" id="claro">
     <input type="button" value="Tamaño de texto" id="Tamano">
 
         <h1>Mantente al tanto y deja un mensaje!</h1>
-
+    <form id="formulario">
         <label for="Nombre">Nombre</label>
         <input type="text" id="Nombre" placeholder="Nombre Real" class="texto">
         <span id ="errornom" class="error"></span>
@@ -41,13 +41,15 @@
             <label for="Otro">Prefiero no decirlo</label>
             <span id ="errorgen" class="error"></span>
         </form>
-
+        <br>
         <label for="Correo">Correo electronico</label>
         <input type="email" id="Correo" placeholder="Ejemplo@mail.com">
         <span id ="errorcor" class="error"></span>
+        <br>
 
         <br>
         <label for="Tema">Tema para el mensaje</label>
+        <br>
         <select name="Tema" id="Tema">
             <option value="queja">Queja</option>
             <option value="opinion">Opinion</option>
@@ -56,10 +58,14 @@
 
         <label> Mensaje </label>
         <div id="mensaje">
-        <textarea name="message" rows="10" cols="200" id="men"></textarea>
+        <textarea name="message" rows="10" cols="130" id="men"></textarea>
         <span id ="errormen" class="error"></span>
         <br>
+    </form>
         <input type="button" id="enviar" value="Enviar">
+        <input type="button" id="Actualizar" value="Actualizar">
+        <input type="button" id="volver" value="volver">
+
         </div>
         <br>
         <table>

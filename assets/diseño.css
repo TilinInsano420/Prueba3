@@ -19,3 +19,35 @@ textarea{
     background-color: black;
     color: white;
 }
+
+body.Normal {
+    font-size: 16px;
+}
+
+body.tam1 {
+    font-size: 18px;
+}
+
+body.tam2 {
+    font-size: 20px;
+}
+
+body.tam3 {
+    font-size: 22px;
+}
+
+input.texto, input[type="email"], select, textarea, input[type="button"] {
+    font-size: 16px;
+}
+
+body.tam1 input.texto, body.tam1 input[type="email"], body.tam1 select, body.tam1 textarea, body.tam1 input[type="button"] {
+    font-size: 18px;
+}
+
+body.tam2 input.texto, body.tam2 input[type="email"], body.tam2 select, body.tam2 textarea, body.tam2 input[type="button"] {
+    font-size: 20px;
+}
+
+body.tam3 input.texto, body.tam3 input[type="email"], body.tam3 select, body.tam3 textarea, body.tam3 input[type="button"] {
+    font-size: 22px;
+}
