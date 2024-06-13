@@ -274,7 +274,7 @@ const actualizardats = () => {
     //pd: tuve que agregar un atributo al actualizar porque me mostraba el codigo del documento en ves de mostrar
     //actualizar pero funciona!!
     let id = document.getElementById("Actualizar").getAttribute("data-id");
-    console.log("please:",id)
+    console.log("please:",id) // me falto eliminar, pero esto es para comprobar de que el id esta en el boton para hacer la actualizacion
     actualizaru(obj,id).then(() => {
         alert("Se actualizó correctamente");
         document.getElementById("enviar").style.display = "inline";
