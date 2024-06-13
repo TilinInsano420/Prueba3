@@ -183,6 +183,7 @@ function validacion() {
 }
 // Función para cargar los datos a la tabla
 const cargar = ()=>{
+    //llama a la funcion recargador para recuperar los datos y mostrarlos en la tabla
     Recargador().then((usuarios)=>{
         //cargar todo en la tabla creada dentro del html
         let estructura = ""
@@ -202,8 +203,9 @@ const cargar = ()=>{
             estructura += "</tr>";
         });
         document.getElementById("tabla").innerHTML = estructura;
+
         //este  a traves de presionar el boton actualizar encuentra a traves de la id, los datos necesarios para mostrarlos
-        //en el formulario
+        //en el formulario (los que aparecen en estructura)
         usuarios.forEach((p) => {
             // consigue los elementos para que estos se puedan mostrar respectivamente con la presionada del boton correcto
             document.getElementById("act"+p.id).addEventListener("click", () => {
@@ -229,7 +231,7 @@ const cargar = ()=>{
                 document.getElementById("Actualizar").style.display = "inline";
                 document.getElementById("volver").style.display = "inline";
             });
-            // este es para pode borrar a traves del boton eliminar y pregunta si se va a borrar el mensaje
+            // este es para poder borrar a traves del boton eliminar y pregunta si se va a borrar el mensaje
             document.getElementById("bor" + p.id).addEventListener("click", () => {
                 if (confirm("Desea eliminar el mensaje de: \n" + p.nombre + " " + p.apellido)) {
                     eliminar(p.id).then(() => {
@@ -270,11 +272,14 @@ const actualizardats = () => {
     let obj = {nombre: vnombre,apellido: vapellido,telefono: vtelefono,nombreUsuario: vnombreUsuario,genero: vgenero,
         correo: vcorreo,tema: vtema,mensaje: vmensaje}
 
-    //se llama la funcion de actualizar de promesas para que lo mande a la bd
+    // se guarda el id del boton actualizar para poder tener su id y asi actualizar de manera correcta
     //pd: tuve que agregar un atributo al actualizar porque me mostraba el codigo del documento en ves de mostrar
     //actualizar pero funciona!!
     let id = document.getElementById("Actualizar").getAttribute("data-id");
     console.log("please:",id) // me falto eliminar, pero esto es para comprobar de que el id esta en el boton para hacer la actualizacion
+    
+    
+    //se llama la funcion actualizaru de promesas para que lo mande a la bd y una vez que lo hace deja de mostrar el boton act y volver
     actualizaru(obj,id).then(() => {
         alert("Se actualizó correctamente");
         document.getElementById("enviar").style.display = "inline";
@@ -286,7 +291,7 @@ const actualizardats = () => {
     });
 };
 
-// esta funcion limpia todo despues de presionarlo
+// esta funcion limpia todo despues de presionarlo a traves de un reset(que hace que todos los campos se reseteen)
 function volver() {
     document.querySelector("form").reset();
     document.getElementById("enviar").style.display = "inline";
